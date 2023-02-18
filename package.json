@@ -1,10 +1,10 @@
 {
-  "name": "nestjs-graphql-demo",
+  "name": "compare-nestjs-type-graphql",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "demo for comparison between nestjs and type-graphql",
+  "author": "james@sapia.ai",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",

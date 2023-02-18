@@ -1,73 +1,62 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+# Compare Nest.js and Type-Graphql
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+- [Compare Nest.js and Type-Graphql](#compare-nestjs-and-type-graphql)
+  - [Dependency Injection](#dependency-injection)
+  - [Validation and Transformation](#validation-and-transformation)
+  - [Contextual Logging](#contextual-logging)
 
-## Description
+## Dependency Injection
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+**When to use Dependency Injection in TypeScript?**
 
-## Installation
+Dependency Injection (DI) is a design pattern that allows for the separation of concerns in software development. In TypeScript, DI is particularly useful in large-scale projects where managing dependencies manually can become complex and difficult to maintain.
 
-```bash
-$ npm install
+Here are some situations where you may want to consider using Dependency Injection in TypeScript:
+
+- When your application has multiple classes that depend on one another.
+- When you want to improve the testability of your code by making it easier to mock or stub dependencies during testing.
+- When you want to make your code more modular and reusable by separating concerns and dependencies.
+- When you want to decouple your code from specific implementations, allowing for greater flexibility and easier maintenance.
+
+To implement DI in TypeScript, you can use a variety of techniques, including constructor injection, property injection, and method injection. Constructor injection is the most common and preferred method of DI in TypeScript, as it allows for the injection of dependencies at object creation time.
+
+To summarize, Dependency Injection is a useful pattern to use in TypeScript when you want to manage dependencies and improve the modularity, testability, and maintainability of your code. It can help make your code more flexible, decoupled, and reusable, which is particularly important in large-scale projects.
+
+**What is the benefit to declare dependency type as interface in TypeScript? And what is the use case for that? for example, how is it used in repository pattern?**
+
+In TypeScript, declaring a dependency type as an interface provides a number of benefits. The primary benefit is that it helps to enforce the contract between the dependency and the consumer of the dependency. This means that the interface provides a clear definition of the expected properties and methods that the dependency should have, making it easier for developers to work with the dependency and to ensure that it is being used correctly.
+
+There are several use cases for declaring dependency types as interfaces in TypeScript. One common use case is in the implementation of the repository pattern. In this pattern, a repository is responsible for encapsulating the logic required to access and manipulate data from a data source. The repository pattern can be used with a wide range of data sources, such as a database, a file system, or an API.
+
+By defining the interface for the repository, you can ensure that any class that implements the repository has the same set of methods and properties, regardless of the specific data source being used. This makes it easy to swap out one data source for another, or to write tests that use a mock repository with the same interface.
+
+Here is an example of how an interface might be used in the repository pattern in TypeScript:
+
+```typescript
+interface IRepository<T> {
+  getAll(): Promise<T[]>;
+  getById(id: string): Promise<T>;
+  add(item: T): Promise<void>;
+  update(item: T): Promise<void>;
+  delete(id: string): Promise<void>;
+}
+
+class MyRepository implements IRepository<MyData> {
+  // Implement methods here
+}
 ```
 
-## Running the app
+In this example, the IRepository interface defines the contract for any repository class, with methods to retrieve, add, update, and delete data. The MyRepository class implements this interface, providing the required functionality to access data of type MyData. By using the interface, it's easy to swap out the MyRepository class with another class that implements the same interface, providing a flexible and testable solution for accessing data.
 
-```bash
-# development
-$ npm run start
+## Validation and Transformation
 
-# watch mode
-$ npm run start:dev
+| Feature                                          | Type-GraphQL | Nest.js |
+| ------------------------------------------------ | ------------ | :-----: |
+| compose validation and transformation seamlessly |              |    ✅    |
+| easy to add custom validation logic              |              |    ✅    |
 
-# production mode
-$ npm run start:prod
-```
 
-## Test
+## Contextual Logging
 
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+In Nest.js, you could install the `nestjs-pino` module to do logging with request information in any place of your codebase.
