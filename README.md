@@ -49,6 +49,11 @@ class MyRepository implements IRepository<MyData> {
 
 In this example, the IRepository interface defines the contract for any repository class, with methods to retrieve, add, update, and delete data. The MyRepository class implements this interface, providing the required functionality to access data of type MyData. By using the interface, it's easy to swap out the MyRepository class with another class that implements the same interface, providing a flexible and testable solution for accessing data.
 
+checkout branch to see the code example
+```sh
+git checkout -b dependency-injection
+```
+
 ## Validation and Transformation
 
 | Feature                                          | Type-GraphQL | Nest.js |
@@ -57,6 +62,14 @@ In this example, the IRepository interface defines the contract for any reposito
 | easy to add custom validation logic              |              |    ✅    |
 
 
+checkout branch to see the code example
+```sh
+git checkout -b validation-and-transformation
+```
 ## Contextual Logging
 
 In Nest.js, you could install the `nestjs-pino` module to do logging with request information in any place of your codebase.
+checkout branch to see the code example
+```sh
+git checkout -b contextual-logging
+```
